@@ -7,7 +7,19 @@ on:
 jobs:
   docker:
     runs-on: ubuntu-latest
+    name: Test on OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}}
+    strategy:
+      matrix:
+        otp: ['25.2.1']
+        elixir: ['1.14.3']
     steps:
+      # Step: Setup Elixir + Erlang image as the base.
+      # - name: Set up Elixir
+      #   uses: erlef/setup-beam@v1
+      #   with:
+      #     otp-version: ${{matrix.otp}}
+      #     elixir-version: ${{matrix.elixir}}
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
 
@@ -25,7 +37,3 @@ jobs:
         with:
           push: true
           tags: gbengstar/lounge-app:latest
-          target: production
-
-      - name: Call render and Deploy
-        run: curl ${{ secrets.CURL_ARGUMENTS }}
