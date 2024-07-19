@@ -35,7 +35,7 @@ RUN mix local.hex --force && \
 ENV MIX_ENV="prod"
 
 # install mix dependencies
-COPY mix.exs mix.lock .env ./
+COPY mix.exs mix.lock ./
 RUN mix deps.get --only $MIX_ENV
 RUN mkdir config
 
@@ -62,7 +62,6 @@ COPY config/runtime.exs config/
 
 COPY rel rel
 
-COPY .env ./
 RUN mix release
 
 # start a new build stage so that the final image will only contain
@@ -82,7 +81,6 @@ ENV LC_ALL en_US.UTF-8
 
 WORKDIR "/app"
 
-COPY .env ./
 RUN chown nobody /app
 
 # set runner ENV
