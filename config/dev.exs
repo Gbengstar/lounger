@@ -2,10 +2,11 @@ import Config
 
 # Configure your database
 config :lounge, Lounge.Repo,
-  username: "gbengstar",
-  password: "admin",
-  hostname: "localhost",
-  database: "lounge_dev",
+  # username: "gbengstar",
+  # password: "admin",
+  # hostname: "localhost",
+  # database: "lounge_dev",
+  # url: env!("DATABASE_URL"),
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10

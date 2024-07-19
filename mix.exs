@@ -60,7 +60,8 @@ defmodule Lounge.MixProject do
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.5"},
       {:bcrypt_elixir, "~> 3.0"},
-      {:guardian, ">= 2.3.2"}
+      {:guardian, ">= 2.3.2"},
+      {:dotenvy, "~> 0.8.0"}
     ]
   end
 
@@ -82,7 +83,8 @@ defmodule Lounge.MixProject do
         "tailwind lounge --minify",
         "esbuild lounge --minify",
         "phx.digest"
-      ]
+      ],
+       "other.task": ["app.config", "other.task"]
     ]
   end
 end
