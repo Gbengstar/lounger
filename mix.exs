@@ -83,8 +83,7 @@ defmodule Lounge.MixProject do
         "tailwind lounge --minify",
         "esbuild lounge --minify",
         "phx.digest"
-      ],
-       "other.task": ["app.config", "other.task"]
+      ]
     ]
   end
 end

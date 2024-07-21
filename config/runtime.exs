@@ -6,7 +6,7 @@ config_dir_prefix = System.get_env("RELEASE_ROOT") || Path.expand(".env")
 
 IO.inspect({config_dir_prefix, %{dir: "#{config_dir_prefix}/.env"}})
 
-source([config_dir_prefix,"#{config_dir_prefix}/.env", System.get_env()])
+source([config_dir_prefix, "#{config_dir_prefix}/.env", System.get_env()])
 
 # config/runtime.exs is executed for all environments, including
 # during releases. It is executed after compilation and before the
@@ -30,22 +30,22 @@ end
 
 if config_env() == :dev do
   database_url =
-    System.get_env("DATABASE_URL") ||
+    env!("DATABASE_URL") ||
       raise """
       environment variable DATABASE_URL is missing.
       For example: ecto://USER:PASS@HOST/DATABASE
       """
 
-      IO.puts(database_url)
+  IO.puts(database_url)
 
   maybe_ipv6 = if System.get_env("ECTO_IPV6") in ~w(true 1), do: [:inet6], else: []
 
   config :lounge, Lounge.Repo,
-    # ssl: true,
+    ssl: false,
     url: database_url,
     pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
     socket_options: maybe_ipv6
-  end
+end
 
 if config_env() == :prod do
   database_url =
@@ -55,7 +55,7 @@ if config_env() == :prod do
       For example: ecto://USER:PASS@HOST/DATABASE
       """
 
-      IO.puts(database_url)
+  IO.puts(database_url)
 
   maybe_ipv6 = if System.get_env("ECTO_IPV6") in ~w(true 1), do: [:inet6], else: []
 

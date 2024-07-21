@@ -34,7 +34,7 @@ defmodule LoungeWeb.ProfileController do
     render(conn, :show, profile: profile)
   end
 
-  def update(conn, %{ "profile" => profile_params}) do
+  def update(conn, %{"profile" => profile_params}) do
     accounts_id = conn.private[:guardian_default_resource].id
     profile = Profiles.get_profile_by_account_id!(accounts_id)
 
